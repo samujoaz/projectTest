@@ -1,4 +1,4 @@
-/* hello word*/
+/* fichier principal avec tous les appels de fonctions*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,11 +25,9 @@ void CreateFile(char *output,string input,float TBC)
     {
       while(getline(inputfile,line)) 
       {
-	
 	  pos=line.find("TBC");
 	  if(pos<=line.size()) line.replace(pos,3, oss.str());
 	  outputfile<<line<<endl;
-	 // cout<<line<<endl;
       }
     }
     else cout<<"ERREUR: Impossible d'ouvrir le fichier:"<<input<<endl;
@@ -39,7 +37,6 @@ void CreateFile(char *output,string input,float TBC)
 
 int main(int argc, char *argv[])
 {
- 
   int nb_cpu=0, nb_cache=0, nb_dsp=0,nb_ligne=0;
   string line, filename,tmp; 
   char dir[100];
@@ -50,7 +47,6 @@ int main(int argc, char *argv[])
   COMPONENTDSP MesComposantsDSP=NULL,CompoDSP_temp=NULL;
 
   ifstream listing_file("composition.txt");   
- 
   if(listing_file)
   {
     uint freq=0, taille=0,assoc=0,bpl=0;
@@ -99,53 +95,39 @@ int main(int argc, char *argv[])
 	      tmp = line.substr(0,line.size()-1);
 	      if(tmp =="CPU")
 	      {
-		//cout<<"connnection cpu_";
+		//<<"connnection cpu_";
 		indice_cpu=atoi(line.substr(tmp.size(),line.size()).c_str());
-		//cout<<indice_cpu;
 		listing_file>>line;
 		listing_file>>line;
 		tmp=line.substr(0,line.size()-1);
 		if(tmp=="L1_")
-		{
-		  //cout<<" to cacheL1_";
-		  
+		{		  
 		  indice_cacheL1=atoi(line.substr(tmp.size(),line.size()).c_str());
-
 		  MesComposantsCPU = ADD_COMPONENTCPU(MesComposantsCPU,AccessToCPU(MonCpu,indice_cpu),AccessToCACHE(MesCacheL1,indice_cacheL1),indice_cacheL1,indice_cpu,"cpu");
-		  //cout<<indice_cacheL1<<endl;   
 		}
 	      }
 	      else {
 		if(tmp =="DSP")
 		{
-		   // cout<<"connnection dsp_";
 		    indice_dsp=atoi(line.substr(tmp.size(),line.size()).c_str());
-		    //cout<<indice_dsp;
 		    listing_file>>line;
 		    listing_file>>line;
 		    tmp=line.substr(0,line.size()-1);
 		      if(tmp=="L1_")
 		      {
-			//cout<<" to cacheL1_";
-			
 			indice_cacheL1=atoi(line.substr(tmp.size(),line.size()).c_str());
 			MesComposantsDSP = ADD_COMPONENTDSP(MesComposantsDSP,AccessToDSP(MonDsp,indice_dsp),AccessToCACHE(MesCacheL1,indice_cacheL1),indice_cacheL1,indice_dsp,"dsp");
-			//cout<<indice_cacheL1<<endl;   
 		      }
 		}
 	      else{
 		if(tmp=="L1_")
 		{
-		  //cout<<"connection cacheL1_";
 		  indice_cacheL1=atoi(line.substr(tmp.size(),line.size()).c_str());
-// 		  cout<<indice_cacheL1;
 		  listing_file>>line;
 		  listing_file>>line;
 		  tmp=line.substr(0,line.size()-1);
 		  if(tmp=="L2_")
 		  {
-		    
-// 		      cout<<" to cacheL2_";
 		      indice_cacheL2=atoi(line.substr(tmp.size(),line.size()).c_str());
 		      cacheL1_tmp=AccessToCACHE(MesCacheL1,indice_cacheL1);
 		      cacheL2_tmp=AccessToCACHE(MesCacheL2,indice_cacheL2);
@@ -161,7 +143,6 @@ int main(int argc, char *argv[])
 			ADD_CACHE_L2_TO_COMPONENTCPU(CompoCPU_temp,cacheL2_tmp);
 			}
 		      }
-// 		    cout<<indice_cacheL2<<endl;
 		  }
 		}
 	      
@@ -220,9 +201,7 @@ int main(int argc, char *argv[])
       }
 	
       }///end while(listing_file>>line)
-    
-//   cout<<endl;
-  }///end if(listing_file)
+    }///end if(listing_file)
   else{
     cout<<"ERREUR: Impossible d'ouvrir le fichier de la liste des architectures"<<endl;
     exit(0);
@@ -237,13 +216,14 @@ int main(int argc, char *argv[])
   nb_cache= NB_CACHE(MesCacheL1);
   nb_cache= NB_CACHE(MesCacheL2);
    
-//   cout<<"nb_cpu: "<<nb_cpu<<endl;
-//   cout<<"nb_dsp: "<<nb_dsp<<endl;
-//   cout<<"nb_cache L1: "<<nb_cache<<endl;
-//   cout<<"nb_cache L2: "<<nb_cache<<endl;
-//  
-//   Affiche_COMPONENTDSP(MesComposantsDSP);  
-/*  */Affiche_COMPONENTCPU(MesComposantsCPU);
+/*    
+   cout<<"nb_cpu: "<<nb_cpu<<endl;
+  cout<<"nb_dsp: "<<nb_dsp<<endl;
+  cout<<"nb_cache L1: "<<nb_cache<<endl;
+  cout<<"nb_cache L2: "<<nb_cache<<endl;
+ 
+  Affiche_COMPONENTDSP(MesComposantsDSP);  
+  Affiche_COMPONENTCPU(MesComposantsCPU);*/
   /// allocations memoires
   uint i=0;
   float T_RWDATA_cpu[nb_cpu];	//temps passé à lire et écrire des datas
@@ -280,8 +260,6 @@ int main(int argc, char *argv[])
   
   i=0;
   
- /* if(nb_dsp>0)
-  {*/
   float T_RWDATA_dsp[nb_dsp];	//temps passé à lire et écrire des datas
   float T_Inst_dsp[nb_dsp];  	//temps passé dans les instructions (ms)
   float T_Total_dsp[nb_dsp]; 	//temps total
@@ -315,9 +293,6 @@ int main(int argc, char *argv[])
   CompoDSP_temp=CompoDSP_temp->next;
 
   }
- /* }*/
- 
-
    return 0;
 }
   

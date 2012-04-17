@@ -1,13 +1,5 @@
-/*#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <iostream>
-#include <fstream>
 
 
-using namespace std;
-
-*/
 #include "structureArchi.h"
 /// fonctions utiles
 CPU ADD_CPU(CPU mon_cpu, string name,uint freq)
@@ -171,7 +163,6 @@ COMPONENTDSP ADD_COMPONENTDSP(COMPONENTDSP my_component,DSP mon_dsp,CACHE ma_cac
   {
     componentdsp *compo_tmp=my_component;
     while(compo_tmp->next!=NULL)compo_tmp=compo_tmp->next;
-
     compo_tmp->next = new_component;
     return my_component;
   }
@@ -282,7 +273,6 @@ void Affiche_COMPONENTCPU(COMPONENTCPU A)
   while(tmp!=NULL)
   {
    cout<<endl;
-   //cout<<"composant N°"<<i<<":"<<endl;
    cout<<"cpu_"<<tmp->CPU_->indice_CPU<<": "<<tmp->CPU_->name_cpu<<endl;
    cout<<"\tstart_frequency: "<<tmp->CPU_->start_frequency<<endl;
    cout<<"\tworking_frequency: "<<tmp->CPU_->work_frequency<<endl;
@@ -310,7 +300,6 @@ void Affiche_COMPONENTDSP(COMPONENTDSP A)
   while(tmp!=NULL)
   {
    cout<<endl;
-   //cout<<"composant N°"<<i<<":"<<endl;
    cout<<"dsp_"<<tmp->DSP_->indice_DSP<<": "<<endl;
    cout<<"\tstart_frequency: "<<tmp->DSP_->start_frequency<<endl;
    cout<<"\tworking_frequency: "<<tmp->DSP_->work_frequency<<endl;
