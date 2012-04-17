@@ -317,28 +317,7 @@ int main(int argc, char *argv[])
   }
  /* }*/
  
- /** definition des affiliations    **/
-//  exec() X threads sur tel CPU
 
- 
-
-  
-
-/// generation de fichier
-
-//line = MesComposantsCPU->CPU_->name_cpu;
-//tmp = line.substr(0,line.size()-4);
-   
-
-// // line.erase(); 
-// line= itoa(i,line,10);
-// line = tmp + line+".txt";
- //sprintf(dir, "slice_cpu_%d.txt",i);
-//tmp = tmp+dir;
-//cout<<tmp<<endl;
-//CreateFile(dir,MesComposantsCPU->CPU_->name_cpu, float _Total_dsp[i]);float TBC
-
-  
    return 0;
 }
   
