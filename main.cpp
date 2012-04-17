@@ -110,8 +110,7 @@ int main(int argc, char *argv[])
 		  //cout<<" to cacheL1_";
 		  
 		  indice_cacheL1=atoi(line.substr(tmp.size(),line.size()).c_str());
-// 		  cacheL1_tmp=AccessToCACHE(MesCacheL1,indice_cacheL1);
-// 		  cpu_tmp=AccessToCPU(MonCpu,indice_cpu);
+
 		  MesComposantsCPU = ADD_COMPONENTCPU(MesComposantsCPU,AccessToCPU(MonCpu,indice_cpu),AccessToCACHE(MesCacheL1,indice_cacheL1),indice_cacheL1,indice_cpu,"cpu");
 		  //cout<<indice_cacheL1<<endl;   
 		}
