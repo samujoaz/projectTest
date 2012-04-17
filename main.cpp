@@ -1,4 +1,4 @@
-
+/* hello word*/
 
 #include <stdio.h>
 #include <stdlib.h>
